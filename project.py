@@ -78,8 +78,7 @@ def delete_student(student_id):
             students_list.remove(student)
             print("Information deleted")
             return 
-    else:
-        print("Enter valid ID")
+    print("Enter valid ID")
         
 
 
@@ -91,24 +90,46 @@ print("""1. Add student
 5. Delete student""")
 print("-"*40)
 
-operation = int(input("What do you want to do? : "))
+try:
+    operation = int(input("What do you want to do? : "))
+except ValueError:
+    print("Invalid operation")
+    exit()
 
 if operation == 1:
-    name = input("Enter students name: ")
-    age = int(input("Enter student's age: "))
-    grade = input("Enter student's grade: ")
+    name = input("Enter students name: ").strip()
+
+    try:
+        age = int(input("Enter student's age: "))
+    except ValueError:
+        print("Invalid age")
+        exit()
+
+    grade = input("Enter student's grade: ").strip()
     add_student(name , age , grade)
 elif operation == 2:
     view_students()
 elif operation == 3:
-    student_id = int(input("Enter student id: "))
-    search_student(student_id)
+    try:
+        student_id = int(input("Enter student id: "))
+        search_student(student_id)
+    except ValueError:
+        print("Invalid student ID")
+        exit()
 elif operation == 4:
-    student_id = int(input("Enter student id: "))
-    update_student(student_id)
+    try:
+        student_id = int(input("Enter student id: "))
+        update_student(student_id)
+    except ValueError:
+        print("Invalid student ID")
+        exit()
 elif operation == 5:
-    student_id = int(input("Enter student id: "))
-    delete_student(student_id)
+    try:
+        student_id = int(input("Enter student id: "))
+        delete_student(student_id)
+    except ValueError:
+        print("Invalid student ID")
+        exit()
 else:
     print("Enter valid operation!")
     
